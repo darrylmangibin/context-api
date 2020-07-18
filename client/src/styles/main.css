@@ -67,8 +67,8 @@ footer p {
 .header {
 	background: #43799c;
 	color: white;
-  padding: 1.6rem 0;
-  display: flex;
+	padding: 1.6rem 0;
+	display: flex;
 }
 
 .header__title {
@@ -82,10 +82,28 @@ footer p {
 }
 
 .header__links {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 300px;
+}
+
+.header__links > button,
+.header__links > a {
+	color: inherit;
+	background: none;
+	border: none;
+  font-size: 1.6rem;
+  text-decoration: none;
+}
+
+.header__links > button,
+.header__links > a:hover {
+	cursor: pointer;
+}
+
+.header__links > button {
+  outline: none;
 }
 
 .header a {

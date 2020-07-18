@@ -8,6 +8,7 @@ import {
 	AUTH_USER,
 	LOGIN_FAIL,
 	LOGIN_SUCCESS,
+	LOGOUT,
 } from "../types";
 
 import authToken from "../../utils/authToken";
@@ -62,7 +63,11 @@ const AuthState = ({ children }) => {
 	const loginUser = async (data) => {
 		try {
 			const res = await axios.post("/auth/login", data);
-			console.log(res);
+			dispatch({
+				type: LOGIN_SUCCESS,
+				payload: res.data,
+			});
+			dispatch(authUser());
 		} catch (err) {
 			const { errors } = err.response.data;
 			dispatch({
@@ -70,6 +75,12 @@ const AuthState = ({ children }) => {
 				payload: errors,
 			});
 		}
+	};
+
+	const logoutUser = () => {
+		dispatch({
+			type: LOGOUT,
+		});
 	};
 
 	return (
@@ -82,6 +93,7 @@ const AuthState = ({ children }) => {
 				registerUser,
 				authUser,
 				loginUser,
+				logoutUser,
 			}}
 		>
 			{children}
