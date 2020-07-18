@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import AboutPage from "./pages/AboutPage";
 import Layout from "./components/Layout/";
+import PrivateRoute from './components/routes/PrivateRoute';
 
 import "./styles/main.css";
 
@@ -23,7 +24,7 @@ const App = () => {
 					<Route path="/login" exact component={LoginPage} />
 					<Route path="/register" exact component={RegistrationPage} />
 					<Route path="/about" exact component={AboutPage} />
-					<Route component={NotesPage} />
+					<PrivateRoute component={NotesPage} />
 				</Switch>
 			</Layout>
 		</Router>

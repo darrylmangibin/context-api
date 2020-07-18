@@ -34,8 +34,6 @@ const LoginForm = () => {
 		setFormErrors(errors);
 	}, [errors]);
 
-	console.log(formErrors);
-
 	return (
 		<div className="container">
 			<h2 style={styles.heading}>Login</h2>
