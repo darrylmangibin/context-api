@@ -44,7 +44,6 @@ const AuthState = ({ children }) => {
 	const registerUser = async (newUser) => {
 		try {
 			const res = await axios.post("/users/register", newUser);
-			console.log(res);
 			dispatch({
 				type: REGISTER_USER,
 				payload: res.data,
@@ -56,7 +55,6 @@ const AuthState = ({ children }) => {
 				type: REGISTER_FAIL,
 				payload: errors,
 			});
-			dispatch(authUser());
 		}
 	};
 

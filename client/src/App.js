@@ -10,7 +10,14 @@ import AboutPage from "./pages/AboutPage";
 import Layout from "./components/Layout/";
 import PrivateRoute from "./components/routes/PrivateRoute";
 
+import authToken from './utils/authToken'
 import "./styles/main.css";
+
+const token = localStorage.getItem("token");
+
+if (token) {
+  authToken(token)
+}
 
 const App = () => {
 	const { authUser } = useContext(AuthContext);
