@@ -7,6 +7,7 @@ const config = require("config");
 const router = express.Router();
 
 const errorsToObject = require("../utils/errors");
+const auth = require("../middleware/auth");
 const User = require("../model/User");
 
 // LOGIN USER
@@ -53,5 +54,18 @@ router.post(
 		return res.status(200).json({ token });
 	}
 );
+
+// AUTH USER
+// @route GET
+// @access PRIVATE
+router.get("/", auth, async (req, res) => {
+	try {
+		const user = await User.findById(req.user.id).select("-password");
+		return res.status(200).json({ user });
+	} catch (err) {
+		console.log(err.message);
+		return res.status(401).send("Server Error");
+	}
+});
 
 module.exports = router;
