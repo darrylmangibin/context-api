@@ -7,7 +7,6 @@ import PageNotFound from '../../pages/PageNotFound';
 import EditNotePage from "./EditNotePage";
 
 const MainPage = (props) => {
-	console.log(props);
 	return (
 		<Switch>
 			<Route path="/" exact component={NotesPage} />
