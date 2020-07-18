@@ -21,7 +21,10 @@ router.get("/", auth, async (req, res) => {
 // @route POST
 // @access PRIVATE
 router.post("/", auth, async (req, res) => {
-	const { title, description } = req.body;
+  const { title, description } = req.body;
+  const errors = {};
+
+  if (!title) return res.status(400).json({ errors: { title: "Please enter a title" } })
 
 	let note = await Note.findOne({ title });
 

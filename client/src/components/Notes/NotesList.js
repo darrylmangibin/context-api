@@ -1,14 +1,20 @@
-import React from "react";
-import { withRouter } from 'react-router-dom';
+import React, { useContext } from "react";
+import { withRouter } from "react-router-dom";
+import { NotesContext } from "../../context/notes/NoteState";
 
 import NoteItems from "./NoteItems";
 import { Button } from "../common";
 
 const NotesList = ({ history }) => {
+	const { notes } = useContext(NotesContext);
+
 	return (
 		<div className="container">
-			<p className="empty-message">No notes to show</p>
-			<NoteItems />
+			{notes.length > 0 ? (
+				notes.map((note) => <NoteItems key={note._id} note={note} />)
+			) : (
+				<p className="empty-message">No notes to show</p>
+			)}
 			<Button title="Create Note" onClick={() => history.push("/create")} />
 		</div>
 	);
