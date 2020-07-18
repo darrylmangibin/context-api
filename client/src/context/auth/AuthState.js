@@ -1,14 +1,21 @@
 import React, { createContext, useReducer } from "react";
 import axios from "../../axios";
 import authReducer from "./authReducer";
-import { REGISTER_USER, REGISTER_FAIL, AUTH_FAIL, AUTH_USER } from "../types";
+import {
+	REGISTER_USER,
+	REGISTER_FAIL,
+	AUTH_FAIL,
+	AUTH_USER,
+	LOGIN_FAIL,
+	LOGIN_SUCCESS,
+} from "../types";
 
 import authToken from "../../utils/authToken";
 
 const initialState = {
 	token: null,
 	user: null,
-	errors: null,
+	errors: {},
 	isAuthenticated: false,
 };
 
@@ -52,15 +59,29 @@ const AuthState = ({ children }) => {
 		}
 	};
 
+	const loginUser = async (data) => {
+		try {
+			const res = await axios.post("/auth/login", data);
+			console.log(res);
+		} catch (err) {
+			const { errors } = err.response.data;
+			dispatch({
+				type: LOGIN_FAIL,
+				payload: errors,
+			});
+		}
+	};
+
 	return (
 		<AuthContext.Provider
 			value={{
 				token: state.token,
 				user: state.user,
 				errors: state.errors,
-        isAuthenticated: state.isAuthenticated,
+				isAuthenticated: state.isAuthenticated,
 				registerUser,
 				authUser,
+				loginUser,
 			}}
 		>
 			{children}

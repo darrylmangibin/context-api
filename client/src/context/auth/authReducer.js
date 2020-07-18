@@ -1,4 +1,4 @@
-import { REGISTER_USER, REGISTER_FAIL, AUTH_FAIL, AUTH_USER } from "../types";
+import { REGISTER_USER, REGISTER_FAIL, AUTH_FAIL, AUTH_USER, LOGIN_FAIL, LOGIN_SUCCESS } from "../types";
 
 export default (state, { type, payload }) => {
 	switch (type) {
@@ -8,7 +8,13 @@ export default (state, { type, payload }) => {
 				user: payload.user,
         isAuthenticated: true,
         token: localStorage.getItem("token")
-			};
+      };
+    case LOGIN_FAIL:
+      return {
+        ...state,
+        isAuthenticated: false,
+        errors: payload
+      }
 		case REGISTER_USER:
 			localStorage.setItem("token", payload.token);
 			return {
@@ -28,9 +34,9 @@ export default (state, { type, payload }) => {
 				...state,
 				token: null,
 				user: null,
-				errors: null,
+				errors: {},
 				isAuthenticated: false,
-			};
+      };
 		default:
 			return state;
 	}
