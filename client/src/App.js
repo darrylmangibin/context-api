@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { AuthContext } from "./context/auth/AuthState";
 
 import NotesPage from "./pages/NotesPage/";
 import LoginPage from "./pages/LoginPage";
@@ -10,6 +11,11 @@ import Layout from "./components/Layout/";
 import "./styles/main.css";
 
 const App = () => {
+  const { authUser } = useContext(AuthContext); 
+
+  useEffect(() => {
+    authUser()
+  }, [])
 	return (
 		<Router>
 			<Layout>
