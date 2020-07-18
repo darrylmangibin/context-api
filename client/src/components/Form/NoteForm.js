@@ -4,8 +4,10 @@ import { NotesContext } from "../../context/notes/NoteState";
 
 import { InputField, TextBox, Button } from "../common";
 
-const NoteForm = ({ history }) => {
-	const { addNote, errors } = useContext(NotesContext);
+const NoteForm = ({ history, match }) => {
+	const { addNote, errors, getNote, note, clearNote } = useContext(
+		NotesContext
+	);
 
 	const [noteFields, setNoteField] = useState({
 		title: "",
@@ -37,8 +39,17 @@ const NoteForm = ({ history }) => {
 	};
 
 	useEffect(() => {
-		setFormErrors(errors);
-	}, [errors]);
+		if (Object.keys(errors).length) {
+			setFormErrors(errors);
+		}
+
+		if (match.params.id) {
+			getNote(match.params.id);
+		}
+		return () => {
+			clearNote();
+		};
+	}, [errors, match.params.id]);
 
 	return (
 		<div className="container">
@@ -57,7 +68,10 @@ const NoteForm = ({ history }) => {
 					value={description}
 					onChange={handleOnchange}
 				/>
-				<Button title="Save Note" onClick={handleOnSubmit} />
+				<div style={{ display: "flex", justifyContent: "space-between" }}>
+					<Button title="Save Note" onClick={handleOnSubmit} />
+					{note && <Button title="Delete Note" secondary />}
+				</div>
 			</form>
 		</div>
 	);
