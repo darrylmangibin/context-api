@@ -2,13 +2,12 @@ import React, { useState } from "react";
 
 import { InputField, Button } from "../common";
 
-const RegisterForm = () => {
+const LoginForm = () => {
 	const [user, setUser] = useState({
-		username: "",
 		email: "",
 		password: "",
 	});
-	const { username, email, password } = user;
+	const { email, password } = user;
 
 	const handleOnChange = (e) => {
 		const { value, name } = e.target;
@@ -17,16 +16,8 @@ const RegisterForm = () => {
 
 	return (
 		<div className="container">
-			<h2 style={styles.heading}>Register</h2>
+			<h2 style={styles.heading}>Login</h2>
 			<form>
-				<InputField
-					title="User Name"
-					name="username"
-					placeholder="Username"
-					value={username}
-					onChange={handleOnChange}
-					autoComplete="off"
-				/>
 				<InputField
 					title="Email"
 					name="email"
@@ -44,7 +35,7 @@ const RegisterForm = () => {
 					onChange={handleOnChange}
 					autoComplete="off"
 				/>
-				<Button title="Register" />
+				<Button title="Login" />
 			</form>
 		</div>
 	);
@@ -57,4 +48,4 @@ const styles = {
 	},
 };
 
-export default RegisterForm;
+export default LoginForm;

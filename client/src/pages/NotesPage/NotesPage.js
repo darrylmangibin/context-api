@@ -1,7 +1,13 @@
-import React from "react";
+import React, { Fragment } from "react";
+
+import Actions from '../../components/Actions';
 
 const NotesPage = () => {
-	return <div>NotesPage</div>;
+	return (
+    <Fragment>
+      <Actions />
+    </Fragment>
+  )
 };
 
 export default NotesPage;
