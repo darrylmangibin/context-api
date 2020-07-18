@@ -67,7 +67,8 @@ footer p {
 .header {
 	background: #43799c;
 	color: white;
-	padding: 1.6rem 0;
+  padding: 1.6rem 0;
+  display: flex;
 }
 
 .header__title {
@@ -78,6 +79,13 @@ footer p {
 .header__subtitle {
 	font-size: 1.6rem;
 	font-weight: 300;
+}
+
+.header__links {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 300px;
 }
 
 .header a {

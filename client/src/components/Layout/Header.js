@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Header = ({ title, subTitle }) => {
@@ -7,6 +8,11 @@ const Header = ({ title, subTitle }) => {
 			<div className="container">
 				<h1 className="header__title">{title}</h1>
 				<h2 className="header__subtitle">{subTitle}</h2>
+			</div>
+			<div className="header__links">
+				<Link to="/login">Login</Link>
+				<Link to="/register">Register</Link>
+				<Link>Logout</Link>
 			</div>
 		</header>
 	);

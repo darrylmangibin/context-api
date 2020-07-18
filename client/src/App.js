@@ -11,16 +11,16 @@ import "./styles/main.css";
 
 const App = () => {
 	return (
-		<Layout>
-			<Router>
+		<Router>
+			<Layout>
 				<Switch>
 					<Route path="/login" exact component={LoginPage} />
 					<Route path="/register" exact component={RegistrationPage} />
 					<Route path="/about" exact component={AboutPage} />
 					<Route component={NotesPage} />
 				</Switch>
-			</Router>
-		</Layout>
+			</Layout>
+		</Router>
 	);
 };
 
