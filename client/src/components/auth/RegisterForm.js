@@ -1,19 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { AuthContext } from "../../context/auth/AuthState";
 
 import { InputField, Button } from "../common";
 
 const RegisterForm = () => {
+	const authContext = useContext(AuthContext);
+	const { registerUser, errors } = authContext;
+
 	const [user, setUser] = useState({
 		username: "",
 		email: "",
 		password: "",
 	});
+	const [formErrors, setFormErrors] = useState({});
 	const { username, email, password } = user;
 
 	const handleOnChange = (e) => {
 		const { value, name } = e.target;
 		setUser((prevState) => ({ ...prevState, [name]: value }));
+		if (Object.keys(formErrors).length) {
+			setFormErrors((prevState) => {
+				delete prevState[name];
+				return { ...prevState };
+			});
+		}
 	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+    registerUser(user);
+	};
+
+	useEffect(() => {
+		if (errors) {
+			setFormErrors(errors);
+		}
+	}, [errors]);
 
 	return (
 		<div className="container">
@@ -26,6 +48,7 @@ const RegisterForm = () => {
 					value={username}
 					onChange={handleOnChange}
 					autoComplete="off"
+					error={formErrors.username}
 				/>
 				<InputField
 					title="Email"
@@ -34,6 +57,7 @@ const RegisterForm = () => {
 					value={email}
 					onChange={handleOnChange}
 					autoComplete="off"
+					error={formErrors.email}
 				/>
 				<InputField
 					title="Password"
@@ -43,8 +67,9 @@ const RegisterForm = () => {
 					value={password}
 					onChange={handleOnChange}
 					autoComplete="off"
+					error={formErrors.password}
 				/>
-				<Button title="Register" />
+				<Button title="Register" onClick={handleSubmit} />
 			</form>
 		</div>
 	);

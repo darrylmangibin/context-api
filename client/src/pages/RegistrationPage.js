@@ -1,5 +1,6 @@
 import React from "react";
 
+
 import { RegisterForm } from "../components/auth/";
 
 const RegistrationPage = () => {
